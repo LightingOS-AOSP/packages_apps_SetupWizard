@@ -21,8 +21,6 @@ import android.widget.TextView;
 import lineageos.hardware.LineageHardwareManager;
 import lineageos.providers.LineageSettings;
 
-import com.android.internal.util.lightning.Utils;
-
 public class LineageSettingsActivity extends BaseSetupWizardActivity {
 
     private SetupWizardApp mSetupWizardApp;
@@ -78,8 +76,7 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
         mSupportsKeyDisabler = isKeyDisablerSupported(this);
         if (mSupportsKeyDisabler) {
             mNavKeys.setChecked(LineageSettings.System.getIntForUser(getContentResolver(),
-                    LineageSettings.System.FORCE_SHOW_NAVBAR,
-                    Utils.hasNavbarByDefault(this) ? 1 : 0, UserHandle.USER_CURRENT) != 0);
+                    LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0);
         } else {
             navKeysRow.setVisibility(View.GONE);
         }
@@ -120,8 +117,7 @@ public class LineageSettingsActivity extends BaseSetupWizardActivity {
         if (mSupportsKeyDisabler) {
             final Bundle myPageBundle = mSetupWizardApp.getSettingsBundle();
             boolean enabled = LineageSettings.System.getIntForUser(getContentResolver(),
-                    LineageSettings.System.FORCE_SHOW_NAVBAR,
-                    Utils.hasNavbarByDefault(this) ? 1 : 0, UserHandle.USER_CURRENT) != 0;
+                    LineageSettings.System.FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) != 0;
             boolean checked = myPageBundle.containsKey(DISABLE_NAV_KEYS) ?
                     myPageBundle.getBoolean(DISABLE_NAV_KEYS) :
                     enabled;
